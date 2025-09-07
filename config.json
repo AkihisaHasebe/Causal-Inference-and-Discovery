@@ -1,11 +1,12 @@
 {
-  "seed": 18,
-  "n_nodes": 10,
-  "n_edges": 20,
-  "n_samples": 1000,
-  "method": "linear",
-  "sem_type": "gauss",
+  "seed": 0,
+  "n_nodes": 20,
+  "n_edges": 30,
+  "n_samples": 1500,
+  "method": "nonlinear",
+  "sem_type": "gp-add",
   "dag_type": "scale_free",
   "custom_adj": null,
-  "save_filename": "synthetic_dataset.csv"
+  "save_filename": "synthetic_dataset.csv",
+  "n_datasets": 10
 }

@@ -1,174 +1,61 @@
+# create_dataset.py と config.json の使い方
 
-<b><p align='center'>[![Packt Sale](https://static.packt-cdn.com/assets/images/packt+events/Improve_UX.png)](https://packt.link/algotradingpython)</p></b> 
-
-<p align="center"><a href="https://packt.link/mlsumgh"><img src="https://static.packt-cdn.com/assets/images/ML Summit Banner v3 1200x627.png" alt="Machine Learning Summit 2025"/></a></p>
-
-## Machine Learning Summit 2025
-**Bridging Theory and Practice: ML Solutions for Today’s Challenges**
-
-3 days, 20+ experts, and 25+ tech sessions and talks covering critical aspects of:
-- **Agentic and Generative AI**
-- **Applied Machine Learning in the Real World**
-- **ML Engineering and Optimization**
-
-👉 [Book your ticket now >>](https://packt.link/mlsumgh)
+このドキュメントでは、`create_dataset.py` スクリプトとその設定ファイル `config.json` の概要と使い方を説明します。
 
 ---
 
-## Join Our Newsletters 📬
+## create_dataset.py の概要
 
-### DataPro  
-*The future of AI is unfolding. Don’t fall behind.*
+`create_dataset.py` は、因果推論のための DAG（有向非巡回グラフ）を定義し、その DAG に基づいた合成データセットを生成する Python スクリプトです。  
+主な機能は以下の通りです。
 
-<p><a href="https://landing.packtpub.com/subscribe-datapronewsletter/?link_from_packtlink=yes"><img src="https://static.packt-cdn.com/assets/images/DataPro NL QR Code.png" alt="DataPro QR" width="150"/></a></p>
-
-Stay ahead with [**DataPro**](https://landing.packtpub.com/subscribe-datapronewsletter/?link_from_packtlink=yes), the free weekly newsletter for data scientists, AI/ML researchers, and data engineers.  
-From trending tools like **PyTorch**, **scikit-learn**, **XGBoost**, and **BentoML** to hands-on insights on **database optimization** and real-world **ML workflows**, you’ll get what matters, fast.
-
-> Stay sharp with [DataPro](https://landing.packtpub.com/subscribe-datapronewsletter/?link_from_packtlink=yes). Join **115K+ data professionals** who never miss a beat.
+- スケールフリー型 DAG の生成
+- 任意の隣接行列による DAG の指定
+- DAG に基づく合成データの生成（線形・非線形、ガウス・非ガウスなどの SEM タイプ対応）
+- DAG の可視化（NetworkX と matplotlib を使用）
+- 生成データの CSV ファイル保存
 
 ---
 
-### BIPro  
-*Business runs on data. Make sure yours tells the right story.*
+## config.json の概要
 
-<p><a href="https://landing.packtpub.com/subscribe-bipro-newsletter/?link_from_packtlink=yes"><img src="https://static.packt-cdn.com/assets/images/BIPro NL QR Code.png" alt="BIPro QR" width="150"/></a></p>
+`config.json` は、`create_dataset.py` の動作パラメータを外部から制御するための JSON 形式の設定ファイルです。  
+主な設定項目は以下の通りです。
 
-[**BIPro**](https://landing.packtpub.com/subscribe-bipro-newsletter/?link_from_packtlink=yes) is your free weekly newsletter for BI professionals, analysts, and data leaders.  
-Get practical tips on **dashboarding**, **data visualization**, and **analytics strategy** with tools like **Power BI**, **Tableau**, **Looker**, **SQL**, and **dbt**.
+| パラメータ名  | 説明                                      | デフォルト値            |
+| ------------- | ----------------------------------------- | ----------------------- |
+| seed          | 乱数シード                                | 18                      |
+| n_nodes       | ノード数（スケールフリー DAG 生成時）     | 10                      |
+| n_edges       | エッジ数（スケールフリー DAG 生成時）     | 17                      |
+| n_samples     | 生成するデータサンプル数                  | 10000                   |
+| method        | データ生成方法（例: 'linear'）            | 'linear'                |
+| sem_type      | SEM のタイプ（例: 'gauss'）               | 'gauss'                 |
+| dag_type      | DAG の種類 ('scale_free' または 'custom') | 'scale_free'            |
+| custom_adj    | カスタム隣接行列（dag_type が'custom'時） | null                    |
+| save_filename | 生成データの保存ファイル名                | 'synthetic_dataset.csv' |
 
-> Get smarter with [BIPro](https://landing.packtpub.com/subscribe-bipro-newsletter/?link_from_packtlink=yes). Trusted by **35K+ BI professionals**, see what you’re missing.
+---
 
+## 使い方
 
+1. `config.json` を編集し、生成したい DAG やデータセットのパラメータを設定します。
+2. ターミナルで以下のコマンドを実行します。
 
-# Causal Inference and Discovery in Python
-
-<a href="https://www.packtpub.com/product/causal-inference-and-discovery-in-python/9781804612989"><img src="https://content.packt.com/B18993/cover_image_small.jpg" alt="Causal Inference and Discovery in Python" height="256px" align="right"></a>
-
-This is the code repository for [Causal Inference and Discovery in Python](https://www.packtpub.com/product/causal-inference-and-discovery-in-python/9781804612989), published by Packt.
-
-**Unlock the secrets of modern causal machine learning with DoWhy, EconML, PyTorch and more**
-
-## What is this book about?
-
-Causal methods present unique challenges compared to traditional machine learning and statistics. Learning causality can be challenging, but it offers distinct advantages that elude a purely statistical mindset. Causal Inference and Discovery in Python helps you unlock the potential of causality.
-
-You’ll start with basic motivations behind causal thinking and a comprehensive introduction to Pearlian causal concepts, such as structural causal models, interventions, counterfactuals, and more. Each concept is accompanied by a theoretical explanation and a set of practical exercises with Python code.
-
-Next, you’ll dive into the world of causal effect estimation, consistently progressing towards modern machine learning methods. Step-by-step, you’ll discover Python causal ecosystem and harness the power of cutting-edge algorithms. You’ll further explore the mechanics of how “causes leave traces” and compare the main families of causal discovery algorithms.
-
-The final chapter gives you a broad outlook into the future of causal AI where we examine challenges and opportunities and provide you with a comprehensive list of resources to learn more.
-
-This book covers the following exciting features: 
-* Master the fundamental concepts of causal inference
-* Decipher the mysteries of structural causal models
-* Unleash the power of the 4-step causal inference process in Python
-* Explore advanced uplift modeling techniques
-* Unlock the secrets of modern causal discovery using Python
-* Use causal inference for social impact and community benefit
-
-If you feel this book is for you, get your [copy](https://www.amazon.com/Causal-Inference-Discovery-Python-learning/dp/1804612987/ref=sr_1_1?keywords=Causal+Inference+and+Discovery+in+Python&s=books&sr=1-1) today!
-
-
-## Instructions and Navigations
-All of the code is organized into folders.
-
-The code will look like the following:
-```
-preds = causal_bert.inference(
-    texts=df['text'],
-    confounds=df['has_photo'],
-)[0]
+```bash
+python create_dataset.py
 ```
 
-**Following is what you need for this book:**
+3. 設定に基づき DAG が生成・可視化され、対応する合成データが作成されます。
+4. 生成データは指定した CSV ファイルに保存されます。
 
-This book is for machine learning engineers, data scientists, and machine learning researchers looking to extend their data science toolkit and explore causal machine learning. It will also help developers familiar with causality who have worked in another technology and want to switch to Python, and data scientists with a history of working with traditional causality who want to learn causal machine learning. It’s also a must-read for tech-savvy entrepreneurs looking to build a competitive edge for their products and go beyond the limitations of traditional machine learning.
+---
 
-With the following software and hardware list you can run all code files present in the book (Chapter 1-15).
+## 注意点
 
-### Software and Hardware List
+- `dag_type` を `'custom'` に設定する場合は、`custom_adj` に隣接行列を 2 次元リスト形式で指定してください。
+- 依存ライブラリとして `numpy`, `networkx`, `matplotlib`, `gCastle` が必要です。事前にインストールしてください。
 
-| Chapter  | Software required                                                                    | OS required                        |
-| -------- | -------------------------------------------------------------------------------------| -----------------------------------|
-|  	1-15	   |  Python 3.9 | Windows macOS, or Linux |
-|  	1-15	   | DoWhy 0.8 | Windows, macOS, or Linux |
-|  	1-15	   | EconML 0.12.0 | Windows, macOS, or Linux |
-|  	1-15	   | CATENets 0.2.3 | Windows, macOS, or Linux | 
-|  	1-15	   | gCastle 1.0.3 | Windows, macOS, or Linux |
-|  	1-15	   | Causica 0.2.0 | Windows, macOS, or Linux |
-|  	1-15	   | Causal-learn 0.1.3.3 | Windows, macOS, or Linux |
-|  	1-15	   | Transformers 4.24.0 | Windows, macOS, or Linux |
+---
 
-
-## Join our Discord server <img alt="Coding" height="25" width="32"  src="https://cliply.co/wp-content/uploads/2021/08/372108630_DISCORD_LOGO_400.gif">
-
-Join our Discord community to meet like-minded people and learn alongside more than 2000 members at [Discord](https://packt.link/infer) <img alt="Coding" height="15" width="35"  src="https://media.tenor.com/ex_HDD_k5P8AAAAi/habbo-habbohotel.gif">
-
-
-### Related products <Other books you may enjoy>
-* Hands-On Graph Neural Networks Using Python  [[Packt]](https://www.packtpub.com/product/hands-on-graph-neural-networks-using-python/9781804617526) [[Amazon]](https://www.amazon.com/Hands-Graph-Neural-Networks-Python/dp/1804617520/ref=sr_1_1?keywords=Hands-On+Graph+Neural+Networks+Using+Python&s=books&sr=1-1)
-  
-* Applying Math with Python - Second Edition  [[Packt]](https://www.packtpub.com/product/applying-math-with-python-second-edition/9781804618370) [[Amazon]](https://www.amazon.com/Applying-Math-Python-real-world-computational/dp/1804618373/ref=sr_1_1?keywords=Applying+Math+with+Python+-+Second+Edition&s=books&sr=1-1)
-  
-## Get to Know the Author
-[**Aleksander Molak**](https://www.linkedin.com/in/aleksandermolak/) is a Machine Learning Researcher and Consultant who gained experience working with Fortune 100, Fortune 500, and Inc. 5000 companies across Europe, the USA, and Israel, designing and building large-scale machine learning systems. On a mission to democratize causality for businesses and machine learning practitioners, Aleksander is a prolific writer, creator, and international speaker. As a co-founder of Lespire, an innovative provider of AI and machine learning training for corporate teams, Aleksander is committed to empowering businesses to harness the full potential of cutting-edge technologies that allow them to stay ahead of the curve.
-He's the host of the Causal AI-centered [Causal Bandits Podcast](https://causalbanditspodcast.com/).
-
-
-
-
-# Note from the Author:
-
-## Environment installation
-1. See the section **Using `graphviz` and GPU** below
-
-2. To install the basic environment run: `conda env create -f causal_book_py39_cuda117.yml`
-
-3. To install the environment for notebook `Chapter_11.2.ipynb` run: `conda env create -f causal-pymc.yml`
-
-**NOTE:** We added an experimental environment for Apple M1 as suggested by @ferrari-leo [here](https://github.com/PacktPublishing/Causal-Inference-and-Discovery-in-Python/issues/8). This environment hasn't been thoroughly tested so please use it at your own risk. 
-
-## Selecting the kernel
-After a successful installation of the environment, open your notebook and select the kernel `causal_book_py39_cuda117`
-
-For notebook `Chapter_11.2.ipynb` change kernel to `causal-pymc`
-
-## Using `graphviz` and GPU
-
-**Note**: Depending on your system settings, you might need to install `graphviz` manually in order to recreate the graph plots in the code. 
-Check https://pypi.org/project/graphviz/ for instructions 
-specific to your operating system.
-
-**Note 2**: To use GPU you'll need to install CUDA 11.7 drivers.
-This can be done here: https://developer.nvidia.com/cuda-11-7-0-download-archive
-
-## Citation
-
-### BibTeX
-```{bibtex}
-@book{Molak2023,
-    title={Causal Inference and Discovery in Python: Unlock the secrets of modern causal machine learning with DoWhy, EconML, PyTorch and more},
-    author={Molak, Aleksander},
-    publisher={Packt Publishing},
-    address={Birmingham},
-    edition={1.},
-    year={2023},
-    isbn={1804612987},
-    note={\url{https://amzn.to/3RebWzn}}
-}
-```
-
-### APA
-```
-Molak, A. (2023). Causal Inference and Discovery in Python: Unlock the secrets of modern causal machine learning with DoWhy, EconML, PyTorch and more. Packt Publishing.
-```
-
-## ‼️ Known mistakes // errata
-For known errors and corrections check:
-
-* [Books purchased before ~12:00 PM on June 13, 2023](https://github.com/PacktPublishing/Causal-Inference-and-Discovery-in-Python/blob/main/errata/Errata%20-%20Early%20Print%20(ordered%20before%20June%2013%202023).ipynb)
-
-* [Books purchased after ~12:00 PM on June 13, 2023](https://github.com/PacktPublishing/Causal-Inference-and-Discovery-in-Python/blob/main/errata/Errata%20-%20Non-Early%20Print%20(ordered%20after%20June%2013%202023).ipynb)
-
-If you spotted a mistake, let us know at book(at)causalpython.io or just open an **issue** in this repo. Thank you 🙏🏼
+以上が `create_dataset.py` と `config.json` の基本的な説明と使い方です。  
+詳細はソースコード内のコメントも参照してください。
