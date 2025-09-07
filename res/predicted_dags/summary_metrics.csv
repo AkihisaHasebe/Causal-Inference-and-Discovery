@@ -1,0 +1,11 @@
+dataset_file,shd,F1
+synthetic_dataset_seed0.csv,33,0.1395
+synthetic_dataset_seed1.csv,36,0.093
+synthetic_dataset_seed2.csv,31,0.2609
+synthetic_dataset_seed3.csv,33,0.2083
+synthetic_dataset_seed4.csv,36,
+synthetic_dataset_seed5.csv,35,0.1364
+synthetic_dataset_seed6.csv,37,
+synthetic_dataset_seed7.csv,33,0.1395
+synthetic_dataset_seed8.csv,35,0.0488
+synthetic_dataset_seed9.csv,34,0.093
