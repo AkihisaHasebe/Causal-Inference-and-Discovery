@@ -1,0 +1,33 @@
+name: causal_book_py39_cuda117
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+channel_priority: strict
+dependencies:
+  - python=3.9
+  - pip
+  - nb_conda
+  # 科学計算系（conda-forge から）
+  - numpy
+  - pandas
+  - matplotlib
+  - seaborn
+  - lightgbm
+  - transformers
+  - networkx=2.8.7
+  # graphviz 本体と Python バインディングは conda 側で
+  - graphviz
+  - python-graphviz
+  # PyTorch + CUDA 11.7（公式推奨の pytorch/nvidia チャンネル）
+  - pytorch
+  - pytorch-cuda=11.7
+  # pip でしか手に入らない/相性が良いものだけ残す
+  - pip:
+      - econml
+      - dowhy==0.8
+      - gcastle==1.0.3
+      - causal-learn==0.1.3.3
+      - grapl-causal==1.5.1
+      - causica==0.2.0
+      - catenets==0.2.3
