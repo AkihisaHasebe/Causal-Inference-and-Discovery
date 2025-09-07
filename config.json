@@ -1,0 +1,11 @@
+{
+  "seed": 18,
+  "n_nodes": 10,
+  "n_edges": 20,
+  "n_samples": 1000,
+  "method": "linear",
+  "sem_type": "gauss",
+  "dag_type": "scale_free",
+  "custom_adj": null,
+  "save_filename": "synthetic_dataset.csv"
+}
